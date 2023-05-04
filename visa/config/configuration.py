@@ -27,7 +27,7 @@ class Configuration:
                                                      
             # data_ingestion_info=self.config_file_path[DATA_INGESTION_CONFIG_KEY]
             data_ingestion_info=self.config_info[DATA_INGESTION_CONFIG_KEY]
-            data_download_url=data_ingestion_info[DATA_INGESTION_DOWNLOAD_URL_KEY]
+            dataset_download_url=data_ingestion_info[DATA_INGESTION_DOWNLOAD_URL_KEY]
 
             raw_data_dir=os.path.join(data_ingestion_artifact_dir,
                                       data_ingestion_info[DATA_INGESTION_RAW_DATA_DIR_KEY])
@@ -55,11 +55,11 @@ class Configuration:
     
     def get_training_pipeline_config(self)->TrainingPipelineConfig:
         try:
-            training_pipeline_config=self.config.info[TRAINING_PIPELINE_CONFIG_KEY]
+            training_pipeline_config=self.config_info[TRAINING_PIPELINE_CONFIG_KEY]
             artifact_dir=os.path.join(ROOT_DIR,
                                       training_pipeline_config[TRAINING_PIPELINE_NAME_KEY],
                                       training_pipeline_config[TRAINING_PIPELINE_ARTIFACT_DIR_KEY])
-            
+            training_pipeline_config=TrainingPipelineConfig(artifact_dir=artifact_dir)
             return training_pipeline_config
         except Exception as e:
             raise CustomException(e,sys) from e
