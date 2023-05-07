@@ -78,7 +78,7 @@ class DataIngestion:
         
     def initiate_data_ingestion(self):
         try:
-            raw_data_dir=self.download_data()
+            raw_file_path = self.download_data()
             return self.split_data_as_train_test()
 
         except Exception as e:
